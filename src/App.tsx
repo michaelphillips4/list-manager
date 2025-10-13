@@ -1,95 +1,58 @@
 
+import { Authenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+import List from './List';
 
 
-function App() {
+export function App() {
 
   return (
-    <>
-    <h1>List Manager</h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
-       </p>
-     
-   <section>
-        <h2>Form Elements</h2>
-
-        <div className="stack">
+    <> <h1 className='center'>List Example</h1>
+    <Authenticator>
+      {({ signOut, user }) => (     <main>
+         
         
-            <label htmlFor="text">input type = text</label>
-            <input type="text" id="text" required />
+            <button onClick={signOut}>Sign out : </button>
+             <details><summary>
+             
+             loged in user details  {user?.signInDetails?.loginId}
+              
+             
+            </summary> {JSON.stringify(user)}</details>
+         
+          <Blurb />
+          <hr />
+          <List />
 
-            <label htmlFor="tel">input type = tel</label>
-            <input type="tel" id="tel" />
+        </main>
+)}
+    </Authenticator></>
+  );
+};
 
-            <label htmlFor="email">input type = email</label>
-            <input type="email" />
+function Blurb() {
 
-            <label htmlFor="url">input type = url</label>
-            <input type="url" />
+  return (
 
-            <label htmlFor="password">input type = password</label>
-            <input type="password" />
-
-            <label htmlFor="number">input type = number</label>
-            <input type="number" />
+    <p>
+      CRUD for a list of items using aws-amplify DataStore. <br />
+      - Create, Read, Update, Delete items <br />
+      - Real-time updates <br />
+      - Offline support <br />
+      - Authentication with AWS Cognito <br />
+      - Built with React, TypeScript, Vite, and AWS Amplify <br />
+      <br />
+      This example uses the Amplify DataStore library to interact with a simple Todo model. <br />
+      The DataStore library provides a programming model for leveraging shared and distributed data without needing to write additional code for offline and online scenarios. <br />
+      It automatically synchronizes data between your app and the cloud, and between devices. <br />
+      <br />
     
-            <label htmlFor="date">input type = date</label>
-            <input type="date" />
+     </p>
 
-            <label htmlFor="datetime-local">input type = datetime-local</label>
-            <input type="datetime-local" />
-
-            <label htmlFor="month">input type = month</label>
-            <input type="month" />
-
-            <label htmlFor="time">input type = time</label>
-            <input type="time" />
-
-            <label htmlFor="select">select</label>
-            <select id="select">
-              <option>item one</option>
-              <option>item two</option>
-              <option>item three</option>
-            </select>
-   
-            <label htmlFor="checkbox">input type = checkbox</label>
-
-            <input type="checkbox" />
-
-            <label htmlFor="radio">input type = radio</label>
- 
-                <input
-                  id="radio1"
-                  type="radio"
-                  name="radio"
-                  value="a"
-                  data-bind="radio"
-                />
-            
-                <input type="radio" name="radio" value="b" />
-            
-                <input type="radio" name="radio" value="c" />
-       
-
-            <label htmlFor="range">input type = range</label>
-            <input type="range" />
-
-            <label htmlFor="reset">input type = reset</label>
-            <input type="reset" />
-
-            <label htmlFor="textarea">textarea</label><br />
-            <textarea rows={5}></textarea>
-
-            <button>Text</button>
-          </div>
-      
-      </section>
-
-
-
-
-    </>
   )
 }
+
+
+
 
 export default App

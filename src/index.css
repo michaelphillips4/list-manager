@@ -24,8 +24,8 @@ select,
 textarea {
   font-family: inherit;
   font-size: 100%;
+  margin-right: 10px;
 }
-
 
 
 
@@ -33,3 +33,9 @@ textarea {
  display: flex;
   flex-direction: column;
 }
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
