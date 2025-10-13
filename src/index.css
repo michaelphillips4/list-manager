@@ -16,3 +16,20 @@ body {
 p{
   text-align: left;
 }
+
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+}
+
+
+
+
+.stack{
+ display: flex;
+  flex-direction: column;
+}
