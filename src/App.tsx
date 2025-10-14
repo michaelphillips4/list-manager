@@ -11,8 +11,8 @@ export function App() {
       <Authenticator>
         {({ signOut, user }) => (
           <main>
-            <h1 className='center'>{user?.signInDetails?.loginId} Lists</h1>
-            <button onClick={signOut}>Sign out</button>
+            <div className='list-row'><h1 className='center list-item-grow'>Lists</h1>
+            <button onClick={signOut}>Sign out</button></div>
             <List />
           </main>
         )}
