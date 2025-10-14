@@ -24,7 +24,7 @@ select,
 textarea {
   font-family: inherit;
   font-size: 100%;
-  margin-right: 10px;
+  margin: 10px;
 }
 
 
@@ -39,3 +39,14 @@ textarea {
   justify-content: center;
   align-items: center;
 } 
+
+.list-row{
+  display: flex;
+  justify-content:end;
+  align-items:center;
+
+}
+
+.list-row-text {
+  flex-grow: 1
+}

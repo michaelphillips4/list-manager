@@ -10,12 +10,23 @@ and "delete" any "Todo" records.
 import { a, defineData, type ClientSchema } from '@aws-amplify/backend';
 
 const schema = a.schema({
-  ListItem: a.model({
-      content: a.string(),
-      isDone: a.boolean()
+
+Item: a.model({
+      name: a.string(),
+      description: a.string(),
+      listId: a.id(),
+      list:a.belongsTo("List","listId")
+    }),
+  List:a.model({
+     
+      name: a.string(), 
+      items: a.hasMany("Item","listId")   
+      
     })
-    .authorization(allow => [allow.publicApiKey()])
-});
+
+  
+    
+}).authorization(allow => [allow.publicApiKey()]);
 
 // Used for code completion / highlighting when making requests from frontend
 export type Schema = ClientSchema<typeof schema>;
