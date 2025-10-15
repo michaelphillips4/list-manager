@@ -1,11 +1,11 @@
 
-
+import Dialog from '../Dialog';
 import { useEffect, useId, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 type item = { id: string, name: string, description: string, listId: string };
 
-export const ListRowEditor = (
+export const ListEditor = (
     { listId,
         listName,
         deleteList,
@@ -20,24 +20,18 @@ export const ListRowEditor = (
             changeListItems: (id: string, values: string[]) => {},
             items: item[] | undefined
         }) => {
-    const [isLoading, setIsLoading] = useState(true);
+
     const [showEdit, setShowEdit] = useState(false);
     const [listNameValue, setListNameValue] = useState("");
     const [listItems, setlistItems] = useState([] as item[] | undefined);
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        setIsLoading(false);
+
         setListNameValue(listName);
         setlistItems(items);
     }, []);
 
-
-    useEffect(() => {
-        if (!isLoading) {
-            changeListItems(listId, listItems?.map(i => i.name) || []);
-        }
-
-    }, [listItems]);
 
     const listNameId = useId()
 
@@ -71,6 +65,7 @@ export const ListRowEditor = (
                             ))}</ol>
                         <button onClick={() => {
                             editList(listId, listNameValue);
+                            changeListItems(listId, listItems?.map(i => i.name) || []);
                             setShowEdit(!showEdit)
                         }
                         }>Save</button>
@@ -87,7 +82,12 @@ export const ListRowEditor = (
 
                     <span className="list-row-text">{listName}</span>
 
-                    <button onClick={() => deleteList(listId)}>Delete</button>
+                    <button onClick={() => setIsOpen(true)}>Delete</button>
+                    <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
+                        <h3>Do you want to delete the list</h3>
+                        <p>{listName}</p>
+                        <button onClick={() => {deleteList(listId); setIsOpen(false)}}>Yes</button>
+                    </Dialog>
                     <button onClick={() => setShowEdit(!showEdit)} >Edit</button>
 
                 </div >
