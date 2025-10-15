@@ -3,6 +3,13 @@ import Dialog from '../Dialog';
 import { useEffect, useId, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+
+import { FaTrash,FaEdit,FaPlus } from "react-icons/fa";
+
+
+
+
+
 type item = { id: string, name: string, description: string, listId: string };
 
 export const ListEditor = (
@@ -44,25 +51,26 @@ export const ListEditor = (
         <>
             {showEdit ?
                 <>
-                    <fieldset>
-                        <legend>Edit List:</legend>
-                        <div className='list-row'>
-                            <label htmlFor={listNameId}>List Name</label>
-                            <input type="text" name="name" id={listNameId} value={listNameValue} onChange={handleChange} placeholder="List name" className='list-item-grow' />
 
-                            <button onClick={() => { setlistItems([{ id: uuidv4(), name: "", description: "", listId: listId }, ...listItems ?? []]) }}>Add item</button>
-                        </div>
-                        <ol>
-                            {listItems?.map((x, i) => (
-                                <li key={x.id} className='list-row'>
-                                    <input type='text' value={listItems[i].name} className='list-item-grow' placeholder='item name'
-                                        onChange={e => {
-                                            listItems[i].name = e.target.value;
-                                            setlistItems([...listItems]);
-                                        }} />
-                                    <button onClick={() => setlistItems(listItems.filter(e => e.id !== x.id))} >Remove</button>
-                                </li>
-                            ))}</ol>
+                    <div className='list-row-2'>
+                        <label htmlFor={listNameId}>List Name</label>
+                        <input type="text" name="name" id={listNameId} value={listNameValue} onChange={handleChange} placeholder="List name" className='list-item-grow' />
+
+                        <button onClick={() => { setlistItems([{ id: uuidv4(), name: "", description: "", listId: listId }, ...listItems ?? []]) }}><FaPlus /></button>
+                    </div>
+                    <ol>
+                        {listItems?.map((x, i) => (
+                            <li key={x.id} className='list-row'>
+                             
+                                <input type='text' value={listItems[i].name}  className='list-item-grow' placeholder='item name'
+                                    onChange={e => {
+                                        listItems[i].name = e.target.value;
+                                        setlistItems([...listItems]);
+                                    }} />
+                                <button onClick={() => setlistItems(listItems.filter(e => e.id !== x.id))} ><FaTrash /></button>
+                            </li>
+                        ))}</ol>
+                    <div className='center'>
                         <button onClick={() => {
                             editList(listId, listNameValue);
                             changeListItems(listId, listItems?.map(i => i.name) || []);
@@ -72,25 +80,30 @@ export const ListEditor = (
                         <button onClick={() => {
                             setShowEdit(!showEdit)
                         }
-                        }>Cancel</button>
+                        }>Cancel</button></div>
 
-
-
-                    </fieldset>
                 </>
-                : <div className="list-row">
+                : <> <div className="list-row">
 
-                    <span className="list-row-text">{listName}</span>
-
-                    <button onClick={() => setIsOpen(true)}>Delete</button>
-                    <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
-                        <h3>Do you want to delete the list</h3>
-                        <p>{listName}</p>
-                        <button onClick={() => {deleteList(listId); setIsOpen(false)}}>Yes</button>
-                    </Dialog>
-                    <button onClick={() => setShowEdit(!showEdit)} >Edit</button>
-
-                </div >
+                    <span className="list-row-text center"><b>{listName}</b></span>
+                    </div>
+<ol>
+                        {listItems?.map((x, i) => (
+                            <li key={x.id} >{listItems[i].name}</li>
+                        ))}
+                    </ol>
+                    <div className='center'>
+                        <button onClick={() => setIsOpen(true)}><FaTrash /></button>
+                        <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
+                            <h3>Do you want to delete the list</h3>
+                            <p>{listName}</p>
+                            <button onClick={() => { deleteList(listId); setIsOpen(false) }}>Yes</button>
+                        </Dialog>
+                        <button onClick={() => setShowEdit(!showEdit)} ><FaEdit /></button>
+                    </div >
+              
+                    
+                </>
             }
 
         </>

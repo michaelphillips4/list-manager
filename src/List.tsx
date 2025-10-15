@@ -118,7 +118,7 @@ export default function List() {
                 <ol>
                     {lists.map((list, index) => (
 
-                        <li key={index}>
+                        <li key={index} className="lists">
 
                             <ListEditor
                                 listId={list.id}

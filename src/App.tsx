@@ -9,11 +9,15 @@ export function App() {
   return (
     <>
       <Authenticator>
-        {({ signOut}) => (
+        {({ signOut }) => (
           <main>
-            <div className='list-row'><h1 className='center list-item-grow'>Lists</h1>
-            <button onClick={signOut}>Sign out</button></div>
+            <h1 className='center'>Lists</h1>
             <List />
+
+            <footer className='center'>
+              <button onClick={signOut}>Sign out</button>
+            </footer>
+
           </main>
         )}
       </Authenticator></>

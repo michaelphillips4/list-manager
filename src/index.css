@@ -1,16 +1,21 @@
-
-.center{
+.center {
   display: flex;
   justify-content: center;
   align-items: center;
-} 
-
-.list-row{
-  display: flex;
-  justify-content:end;
-  align-items:center;
-
 }
+
+.list-row {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.list-row-2 {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
 
 .list-row-text {
   flex-grow: 1
@@ -20,8 +25,39 @@
   flex-grow: 1
 }
 
-dialog{
+dialog {
   text-align: center;
 }
 
 
+.lists {
+  border: 1px solid silver;
+  border-radius: 15px;
+  padding: 10px 20px;
+  margin: 10px;
+}
+
+main > ol {
+  list-style:none;
+  padding-left: 0;
+}
+
+
+
+
+/* On screens that are 600px wide or less, make the columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .list-row-2 {
+    flex-direction: column;
+  }
+
+
+  .lists {
+    border: 0;
+    border-bottom: 1px solid silver;
+    border-radius: 0;
+    padding: 0;
+    margin: 5px;
+  }
+
+}
